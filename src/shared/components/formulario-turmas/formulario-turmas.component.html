@@ -1,0 +1,67 @@
+<div *ngIf="loading" class="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50">
+  <mat-spinner></mat-spinner>
+</div>
+<app-dialog
+[isOpen]="isDialogOpen"
+title="Ocorreu um erro"
+[message]="errorMessage"
+confirm="Entendi"
+(onconfirm)="voltarCadastroTurma()"
+></app-dialog>
+<form [formGroup]="formulario" class="w-full ">
+  <div class="mt-4">
+    <app-select label="Ano Escolar" placeholder="6º ano" [data]="dataTurma.year" formControlName="year" id="year"
+      [showError]="(formulario.controls['year'].invalid && formulario.controls['year'].touched) || showError">
+    </app-select>
+    <p *ngIf="formulario.controls['year']?.errors?.['required'] && formulario.controls['year']?.touched"
+      class="text-red-500">
+      É obrigatório informar o Ano Escolar.
+    </p>
+  </div>
+
+  <div class="mt-4">
+    <app-select label="Turno" placeholder="Manhã" [data]="dataTurma.shift" formControlName="shift" id="shift"
+      [showError]="(formulario.controls['shift'].invalid && formulario.controls['shift'].touched) || showError">
+    </app-select>
+    <p *ngIf="formulario.controls['shift']?.errors?.['required'] && formulario.controls['shift']?.touched"
+      class="text-red-500">
+      É obrigatório informar a Turma.
+    </p>
+  </div>
+
+  <div class="mt-4">
+    <app-select label="Ensino" placeholder="Fundamental" [data]="dataTurma.teaching" formControlName="teaching" id="teaching"
+      [showError]="(formulario.controls['teaching'].invalid && formulario.controls['teaching'].touched) || showError">
+    </app-select>
+    <p *ngIf="formulario.controls['teaching']?.errors?.['required'] && formulario.controls['teaching']?.touched"
+      class="text-red-500">
+      É obrigatório informar o tipo de Ensino.
+    </p>
+  </div>
+
+  <div class="mt-4">
+    <app-input-component label="Identificador de turma" type="text" placeholder="6º ano B" formControlName="identifier"
+      id="identifier"
+      [showError]="(formulario.controls['identifier'].invalid && formulario.controls['identifier'].touched) || showError">
+    </app-input-component>
+
+    <p *ngIf="(formulario.controls['identifier']?.errors?.['maxlength'] && formulario.controls['identifier']?.touched) || showError"
+      class="text-red-500">
+      O identificador deve ter no máximo 20 caracteres e pode conter letras, números e caracteres especiais.
+    </p>
+
+    <p *ngIf="formulario.controls['identifier']?.errors?.['required'] && formulario.controls['identifier']?.touched"
+      class="text-red-500">
+      É obrigatório informar o identificador para a turma.
+    </p>
+
+    <div *ngIf="showError" class="text-red-500">
+      {{ errorMessage }}
+    </div>
+
+  </div>
+  <div class="w-1/2 m-auto mt-3">
+    <app-button buttonStyle="full-primary-500" title="Cadastrar" (click)="onSubmit()"
+      [disabled]="!formulario.valid || loading"></app-button>
+  </div>
+</form>

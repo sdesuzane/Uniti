@@ -1,0 +1,51 @@
+<mat-dialog-content class="relative flex flex-col justify-center items-center">
+  <div [class.opacity-50]="loading" [class.pointer-events-none]="loading" class="w-full">
+    <div class="flex flex-col items-center text-center p-1">
+      <p class="text-[20px] font-bold text-black">Olá!</p>
+      <p class="text-[16px] text-black">
+        Acompanhe de perto o desenvolvimento dos nossos alunos!
+      </p>
+      <p class="text-[14px] text-black">
+        Insira seus dados para acessar o Unitis:
+      </p>
+    </div>
+
+    <form [formGroup]="formulario" class="w-full flex flex-col items-center gap-4">
+      <div class="w-4/5">
+        <app-input-component type="email" formControlName="email" label="Insira o e-mail:" placeholder="Seu e-mail"
+          [showError]="
+            (formulario.get('email')?.invalid && formulario.get('email')?.touched) || showError
+          "></app-input-component>
+        <p *ngIf="formulario.get('email')?.hasError('required') && formulario.get('email')?.touched"
+          class="text-red-500">
+          O e-mail é obrigatório.
+        </p>
+        <p *ngIf="formulario.get('email')?.hasError('email') && formulario.get('email')?.touched" class="text-red-500">
+          Por favor, insira um e-mail válido.
+        </p>
+      </div>
+
+      <div class="w-4/5">
+        <app-input-component type="password" formControlName="password" label="Insira sua senha:"
+          placeholder="Sua senha" [showError]="
+            (formulario.get('password')?.invalid && formulario.get('password')?.touched) || showError
+          "></app-input-component>
+        <p *ngIf="formulario.get('password')?.hasError('required') && formulario.get('password')?.touched"
+          class="text-red-500">
+          A senha é obrigatória.
+        </p>
+        <p *ngIf="showError" class="text-red-500">
+          Seu e-mail ou senha estão incorretos.
+        </p>
+      </div>
+
+      <div class="w-4/5">
+        <app-button title="Entrar" (clickButton)="submit()"></app-button>
+      </div>
+    </form>
+  </div>
+
+  <mat-spinner *ngIf="loading"
+    class="top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"></mat-spinner>
+</mat-dialog-content>
+<lib-toastify-toast-container [pauseOnHover]="false"></lib-toastify-toast-container>

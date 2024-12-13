@@ -1,0 +1,82 @@
+<div class="flex justify-between">
+  <app-menu-lateral class="w-20 md:w-36 sm:w-20"></app-menu-lateral>
+  <div class="flex-1 h-auto flex flex-col bg-white">
+    <div class="w-full sm:w-[1050px] sm:ml-[109px] mt-[45px] px-4 sm:px-0">
+      <article class="text-wrap">
+        <p class="font-roboto font-bold text-3xl sm:text-5xl">
+          Plano de Desenvolvimento Individual - PDI
+        </p>
+        <p class="font-roboto font-semibold text-xl sm:text-2xl">
+          Olá, professor(a)!
+        </p>
+        <div class="w-full  mt-[25px] mb-[30px]">
+          <p class="font-roboto font-medium text-[14px] sm:text-[16px]">
+            Aqui você tem acesso a todas as ferramentas necessárias para registrar o Plano de Desenvolvimento Individual
+            (PDI) dos seus estudantes. <br> Para começar, selecione uma turma e visualize os alunos matriculados para
+            cadastrar o PDI.
+          </p>
+        </div>
+      </article>
+      <div class="w-full sm:w-[260px] text-xs mb-[30px]">
+        <app-button (clickButton)="redirectToWhatsApp()" title="Ficou com alguma dúvida? Clique aqui!" [buttonStyle]="'full-primary-100'" [height]="'26px'"></app-button>
+      </div>
+
+      <div class="flex flex-col sm:flex-row justify-between items-center w-full mb-4 space-y-4 sm:space-y-0">
+
+        <div class="w-full sm:w-[266px]">
+          <app-select label="Turma" [data]="dataTurma"
+          placeholder="Selecione uma turma"
+          [(ngModel)]="selectedTurma"
+          (ngModelChange)="onTurmaSelect()"></app-select>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTurma" class="w-full sm:w-[1050px] bg-white flex flex-col items-center justify-center rounded-lg">
+        <div *ngIf="loading" class="flex items-center justify-center">
+          <p>Carregando alunos...</p>
+        </div>
+        <div *ngIf="!loading && alunos.length > 0" class="w-full max-h-[250px] overflow-y-auto scrollbar-hide">
+          <ul class="space-y-4 w-full">
+            <li *ngFor="let aluno of alunos" class="bg-gray-100 sm:h-[83px] flex flex-col justify-center px-8">
+              <div class="flex justify-between items-center">
+                <div>
+                  <p class="font-bold text-[16px]">{{ aluno.name }}</p>
+                  <p class="text-gray-500 text-[13px]">{{ aluno.registration }}</p>
+                </div>
+                <div>
+                  <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="cadastrarPdi(aluno.id)">
+                      <span>Cadastrar PDI</span>
+                    </button>
+                  </mat-menu>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div  *ngIf="!loading && alunos.length === 0"
+        class="w-full sm:w-[1050px] px-4 sm:px-0 bg-gray-100 flex flex-col items-center justify-center p-8 rounded-lg">
+        <img src="../../../assets/img/icon_pen.png" alt="Ícone de Seleção" class="w-[113px]">
+        <p class="font-roboto font-semibold text-[20px] sm:text-[20px]">
+          Nenhum aluno encontrado
+        </p>
+        <p class="text-gray-500 font-medium">Verifique os termos pesquisados.</p>
+      </div>
+      </div>
+
+
+      <div  *ngIf="!selectedTurma"
+        class="w-full sm:w-[1050px] px-4 sm:px-0 bg-gray-100 flex flex-col items-center justify-center p-8 rounded-lg">
+        <img src="../../../assets/img/folha.png" alt="Ícone de Seleção" class="w-[113px]">
+        <p class="font-roboto font-semibold text-[20px] sm:text-[20px]">
+          Selecione uma turma
+        </p>
+        <p class="text-gray-500 font-medium"> para visualizar os estudantes.</p>
+      </div>
+
+    </div>
+  </div>
+</div>

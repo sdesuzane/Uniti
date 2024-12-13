@@ -1,0 +1,62 @@
+<mat-dialog-content class="relative flex flex-col justify-center items-center">
+  <div [class.opacity-50]="loading" [class.pointer-events-none]="loading" class="w-full">
+    <div class="flex flex-col items-center text-center p-1">
+      <p class="text-[20px] font-bold text-black">Crie uma senha segura:</p>
+      <p class="text-[16px] text-black">
+        Digite uma senha forte, utilizando uma combinação de letras, números e símbolos.
+      </p>
+    </div>
+
+    <form [formGroup]="formulario" class="w-full flex flex-col items-center gap-4">
+      <div class="w-4/5">
+        <app-input-component
+          type="password"
+          formControlName="password"
+          label="Nova senha"
+          placeholder="Nova senha"
+          [showError]="!!(formulario.get('password')?.invalid && formulario.get('password')?.touched)"
+        ></app-input-component>
+
+        <p *ngIf="formulario.get('password')?.hasError('required') && formulario.get('password')?.touched" class="text-red-500">
+          A nova senha é obrigatória.
+        </p>
+        <p
+          [ngClass]="{
+            'text-red-500': !passwordValid,
+            'text-green-500': passwordValid
+          }"
+          class="text-sm mt-1"
+        >
+          Mínimo de 6 caracteres, com pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial.
+        </p>
+      </div>
+
+      <div class="w-4/5">
+        <app-input-component
+          type="password"
+          formControlName="confirmPassword"
+          label="Confirme sua senha"
+          placeholder="Confirme sua senha"
+          [showError]="!!(formulario.get('confirmPassword')?.invalid && formulario.get('confirmPassword')?.touched)"
+        ></app-input-component>
+
+        <p *ngIf="formulario.get('confirmPassword')?.hasError('required') && formulario.get('confirmPassword')?.touched" class="text-red-500">
+          A confirmação da senha é obrigatória.
+        </p>
+        <p *ngIf="!senhasIguais && formulario.get('confirmPassword')?.touched" class="text-red-500">
+          As senhas não coincidem.
+        </p>
+      </div>
+
+      <div class="w-4/5">
+        <app-button title="Confirmar" (clickButton)="submit()"></app-button>
+      </div>
+    </form>
+  </div>
+
+  <mat-spinner
+    *ngIf="loading"
+    class="top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"
+  ></mat-spinner>
+</mat-dialog-content>
+<lib-toastify-toast-container [pauseOnHover]="false"></lib-toastify-toast-container>

@@ -1,0 +1,121 @@
+<div *ngIf="loading" class="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50">
+  <mat-spinner></mat-spinner>
+</div>
+<app-dialog
+[isOpen]="isDialogOpen"
+title="Ocorreu um erro"
+[message]="errorMessage"
+confirm="Entendi"
+(onconfirm)="voltarCadastroEstudante()"
+></app-dialog>
+  <form [formGroup]="formulario" class="w-full ">
+      <div class="mt-4">
+      <app-input-component
+        placeholder="Nome do aluno"
+        label="Nome completo"
+        type="text"
+        formControlName="name"
+        [showError]="
+       ( formulario.controls['name'].invalid &&
+        formulario.controls['name'].touched) || showError
+        "></app-input-component>
+      <p *ngIf="
+        formulario.controls['name'].errors?.['required'] &&
+        formulario.controls['name'].touched
+      " class="text-red-500">
+        O nome do aluno é obrigatório.
+      </p>
+    </div>
+
+    <div class="mt-[14px] sm:mt-[18px]">
+      <app-input-component
+        placeholder="123456789"
+        type="number"
+        label="Número da Matrícula"
+        maxlength="10"
+        [hasMask]="true"
+        maskPattern= "9999999999"
+        formControlName="registration"
+        [showError]="(  formulario.controls['registration'].invalid &&
+        formulario.controls['registration'].touched ) || showError
+      "></app-input-component>
+      <p *ngIf="
+        formulario.controls['registration'].errors?.['required'] &&
+        formulario.controls['registration'].touched
+      " class="text-red-500">
+        O número da matrícula é obrigatório.
+      </p>
+    </div>
+
+    <div class="mt-[14px] sm:mt-[18px]">
+      <app-select label="Turma" placeholder="6º ano B" [data]="dataTurma" formControlName="schoolClassIds"
+      [showError]="(formulario.controls['schoolClassIds'].invalid  &&
+      formulario.controls['schoolClassIds'].touched) || showError">
+        </app-select>
+      <p *ngIf="
+        formulario.controls['schoolClassIds'].errors?.['required'] &&
+        formulario.controls['schoolClassIds'].touched
+      " class="text-red-500">
+        A turma é obrigatória.
+      </p>
+    </div>
+
+    <div class="mt-[14px] sm:mt-[18px]">
+      <app-input-component
+        placeholder="123.456.789-00"
+        type="text"
+        label="CPF do responsável"
+        formControlName="cpf"
+        minlength="14"
+        [hasMask]="true"
+        maskPattern= "000.000.000-00"
+        [showError]="
+        (formulario.controls['cpf'].errors?.['required'] ||
+        formulario.controls['cpf'].errors?.['pattern']) &&
+        formulario.controls['cpf'].touched || showError"></app-input-component>
+      <p *ngIf="
+        formulario.controls['cpf'].errors?.['required'] &&
+        formulario.controls['cpf'].touched
+      " class="text-red-500">
+        O CPF é obrigatório.
+      </p>
+      <p
+        *ngIf="formulario.controls['cpf'].errors?.['pattern'] && formulario.controls['cpf'].touched"
+        class="text-red-500">
+        O CPF deve ter no mínimo 11 dígitos.
+      </p>
+    </div>
+
+    <div class="mt-[14px] sm:mt-[18px]">
+      <app-input-component
+        placeholder="responsavel@email.com"
+        type="email"
+        label="E-mail do responsável"
+        formControlName="email"
+        [showError]="
+        (formulario.controls['email'].errors?.['required'] ||
+        formulario.controls['email'].errors?.['email']) &&
+        formulario.controls['email'].touched || showError"></app-input-component>
+      <p *ngIf="
+        formulario.controls['email'].errors?.['required'] &&
+        formulario.controls['email'].touched
+      " class="text-red-500">
+        O e-mail é obrigatório.
+      </p>
+      <p *ngIf="
+        formulario.controls['email'].errors?.['email'] &&
+        formulario.controls['email'].touched
+      " class="text-red-500">
+        Insira um endereço de e-mail válido.
+      </p>
+    </div>
+
+    <div *ngIf="showError" class="text-red-500">
+      {{ errorMessage }}
+    </div>
+
+    <div class="w-1/2 m-auto mt-3">
+      <app-button buttonStyle="full-primary-500" title="Cadastrar"
+        (click)="onSubmit()" [disabled]="!formulario.valid || loading"></app-button>
+    </div>
+  </form>

@@ -1,0 +1,16 @@
+<div class="flex justify-center relative">
+  <div class="w-[1000px] h-[119px] flex items-center">
+    <app-button-voltar [rota]="'/tela-pdi'" class="mb-2 ml-2 mr-10 "></app-button-voltar>
+    <p class="text-black font-bold text-3xl">{{ titulo }}</p>
+  </div>
+</div>
+<div class="flex justify-center">
+  <div class="w-[70%] md:w-[40%] sm:w-[70%]">
+    <div class="mb-[25px]">
+      <ng-container>
+        <app-formulario-pdi (pageChange)="updateTitle($event)"></app-formulario-pdi>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<lib-toastify-toast-container [pauseOnHover]="false"></lib-toastify-toast-container>

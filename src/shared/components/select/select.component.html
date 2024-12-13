@@ -1,0 +1,25 @@
+<div class="relative">
+  <div class="w-full">
+    <mat-form-field class="w-full">
+      <mat-label>{{ label }}</mat-label>
+      <mat-select
+        [placeholder]="placeholder"
+        [multiple]="multiple"
+        [value]="value"
+        (selectionChange)="onSelectionChange($event)"
+        (focus)="onFocus()"
+        (blur)="onBlur()"
+      >
+       <mat-option
+          *ngFor="let option of data"
+          [value]="option.value"
+          class="text-gray-700 hover:bg-purple-100"
+        >
+          {{ option.label }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="showError" class="text-red-500">
+        Por favor, selecione uma opção válida.
+      </mat-error>
+    </mat-form-field>
+  </div>

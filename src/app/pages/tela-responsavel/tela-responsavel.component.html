@@ -1,0 +1,55 @@
+<div class="bg-primary-100 min-h-screen flex flex-col items-center relative">
+  <div class="sticky bg-primary-100 w-[100vw] sm:w-[1100px] max-w-full z-10 p-4 mx-auto">
+
+    <app-button
+      class="absolute "
+      [simpleButtonGray]="true"
+      (clickButton)="removerTokenERetornarInicial()"
+      [image]="'../../../assets/img/logout.png'"
+    ></app-button>
+
+    <div class="relative w-full max-w-[1200px] mx-auto mt-[100px]">
+      <div class="logo-wrapper absolute top-[-80px] left-1/2 transform -translate-x-1/2 z-20">
+        <div class="bg-white w-[160px] h-[160px] rounded-full flex justify-center items-center">
+          <img src="../../../assets/img/logo_uniti.png" alt="logo uniti" class="w-[120px]">
+        </div>
+      </div>
+    </div>
+
+      <div class="bg-white pt-20 pb-10 px-8 md:px-20 rounded-[26px] relative z-10">
+        <div class="text-center space-y-4 mb-10">
+          <p class="text-3xl font-bold">ACOMPANHAMENTO DE DESENVOLVIMENTO</p>
+          <p class="text-lg text-gray-700">
+            Olá!
+          </p>
+          <p class="text-lg text-gray-700">
+            Bem-vindo ao acompanhamento de desenvolvimento do estudante!
+          </p>
+          <p class="text-lg text-gray-700">
+            Aqui, você tem acesso ao nosso programa virtual de acompanhamento com
+            temas específicos: Inteligência Emocional, Desenvolvimento Acadêmico e Responsabilidade.
+          </p>
+        </div>
+
+        <app-progress-bar
+        [alt]="'titulo inteligência emocional'"
+        image="../../../assets/img/icon_intelligence.png"
+        [title]="'INTELIGÊNCIA EMOCIONAL'"
+        [progressValue]="100"
+        ></app-progress-bar>
+        <app-progress-bar
+        [alt]="'titulo desenvolvimento acadêmico'"
+        image="../../../assets/img/icon_hat.png"
+        [title]="'DESENVOLVIMENTO ACADÊMICO'"
+        [progressValue]="60"></app-progress-bar>
+        <app-progress-bar
+        [alt]="'titulo reponsabilidade'"
+        image="../../../assets/img/icon_hand.png"
+        [title]="'RESPONSABILIDADE'"
+        [progressValue]="20"></app-progress-bar>
+
+        <app-campo-consideracoes></app-campo-consideracoes>
+
+      </div>
+    </div>
+  </div>

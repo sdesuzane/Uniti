@@ -1,0 +1,19 @@
+<div
+  class="bg-primary-100 h-screen w-20 md:w-36 sm:w-20  fixed top-0 flex flex-col z-10"
+>
+  <div class="w-full bg-white h-[45px] relative">
+    <div
+      class="bg-white w-24 h-24 rounded-full absolute left-1/2 transform -translate-x-1/2 -bottom-8 flex justify-center items-center"
+    >
+    <img src="../../../assets/img/logo_uniti.png" alt="logo uniti" class="w-[65px] mt-[20px]">
+    </div>
+  </div>
+  <div class="flex flex-col items-center mt-auto mb-5">
+    <app-button
+      title="Sair"
+      [simpleButtonGray]="true"
+      (clickButton)="logout()"
+    ></app-button>
+    <span class="text-xs mt-2 text-gray">V1.0.0</span>
+  </div>
+</div>

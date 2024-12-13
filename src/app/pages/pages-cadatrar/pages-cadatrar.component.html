@@ -1,0 +1,24 @@
+<div class="flex justify-center relative">
+  <div class="w-[1000px] h-[80px] relative">
+    <app-button-voltar [rota]="'/tela-principal'" class="absolute bottom-0 left-0 mb-2 ml-2"></app-button-voltar>
+  </div>
+</div>
+<div class="flex justify-center">
+  <div class=" w-[70%] md:w-[40%] sm:w-[70%] mt-[45px]">
+    <div class=" h-auto w-auto mb-0">
+      <p class="text-black font-bold text-2xl text-start m-0">{{titulo}} </p>
+      <p class="text-start m-0 text-base">{{subtitulo}} </p>
+    </div>
+    <div class="mb-[25px]">
+      <ng-container *ngIf="type === 'estudantes'">
+        <app-formulario-estudante></app-formulario-estudante>
+      </ng-container>
+      <ng-container *ngIf="type==='turmas'">
+       <app-formulario-turmas></app-formulario-turmas>
+      </ng-container>
+      <ng-container *ngIf="type==='professores'">
+        <app-formulario-docente></app-formulario-docente>
+      </ng-container>
+    </div>
+  </div>
+</div>

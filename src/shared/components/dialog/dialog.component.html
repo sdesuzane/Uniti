@@ -1,0 +1,28 @@
+<div class="fixed inset-0 bg-opacity-40 backdrop-blur-sm z-50" *ngIf="isOpen">
+  <div class="flex flex-col max-w-80 rounded-[12px] bg-primary-100 shadow-lg fixed right-[40px] bottom-[28px]">
+      <div class="pt-3 pb-1 px-3 leading-6 text-[14px] gap-[4px] text-cinza-300">
+          <p class="m-0 font-bold text-lg">{{ title }}</p>
+          <p class="m-0 font-light">{{ message }}</p>
+      </div>
+      <div
+      class="flex pb-[8px]"
+      [ngClass]="{ 'justify-start pl-4': confirm && !cancel, 'justify-around': confirm && cancel }"
+    >
+    <ng-container *ngIf="cancel">
+      <button
+        class="py-2 text-center font-medium leading-6 cursor-pointer text-primary-500"
+        (click)="onCancel()"
+      >
+        {{ cancel }}
+      </button>
+    </ng-container>
+    <ng-container *ngIf="confirm">
+      <button
+        class="py-2 text-center font-medium leading-6 cursor-pointer text-primary-500"
+        (click)="onConfirm()"
+      >
+        {{ confirm }}
+      </button>
+    </ng-container>
+  </div>
+</div>

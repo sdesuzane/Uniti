@@ -1,0 +1,13 @@
+<button
+  (click)="emitFunction()"
+  [disabled]="disabled"
+  class="ripple-effect rounded-full w-full hover:opacity-85 duration-150 relative overflow-hidden"
+  [ngClass]="{
+    'bg-primary-500 text-slate-200': buttonStyle === 'full-primary-500' && !simpleButtonGray,
+    'bg-primary-100 text-black': buttonStyle === 'full-primary-100',
+  }"
+  [ngStyle]="{ height: height || '40px' }"
+>
+  {{ title }}
+  <img *ngIf="image" [src]="image" [alt]="alt || 'botão'" class="w-[40px] h-[40px]" />
+</button>

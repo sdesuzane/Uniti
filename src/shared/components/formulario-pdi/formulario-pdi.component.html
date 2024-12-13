@@ -1,0 +1,82 @@
+<div *ngIf="loading" class="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50">
+  <mat-spinner></mat-spinner>
+</div>
+
+<app-dialog
+  [isOpen]="isDialogOpen"
+  title="DESEJA CONFIRMAR O ENVIO?"
+  message="As informações cadastradas no PDI não poderão ser editadas após o envio."
+  cancel="Retornar"
+  confirm="Enviar PDI"
+  (oncancel)="returnForm()"
+  (onconfirm)="createPDIButton()"
+></app-dialog>
+
+<app-dialog
+  [isOpen]="showConfirmDialog"
+  title="PDI REGISTRADO COM SUCESSO!"
+  message="Para registrar outro PDI, retorne ao painel principal e selecione um novo estudante."
+  confirm="Voltar ao painel"
+  (onconfirm)="returnPanel()"
+></app-dialog>
+
+<div class="p-6 max-w-3xl mx-auto bg-white rounded-lg">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div *ngFor="let field of formFields" [hidden]="field.page !== paginaAtual" class="mb-14">
+      <p class="text-[16px] font-bold">{{ field.label }}</p>
+      <div *ngFor="let option of options" class="flex items-center bg-gray-100 mb-2 pl-6 transition-colors duration-300 cursor-pointer hover:bg-primary-100">
+        <input
+          type="radio"
+          [value]="option"
+          [formControlName]="field.name"
+          class="accent-primary-500 mr-4 h-[56px] p-[10px] cursor-pointer"
+          [id]="field.name + '-' + option"
+        />
+        <label [for]="field.name + '-' + option">{{ option }}</label>
+      </div>
+    </div>
+
+    <div *ngIf="paginaAtual === 3">
+      <div class="mb-6">
+        <label for="consideracoes" class="text-[16px] font-bold block mb-2">Considerações</label>
+        <textarea
+          id="consideracoes"
+          formControlName="consideracoes"
+          placeholder="Acrescente considerações sobre o desempenho geral do aluno. Caso não tenha considerações a fazer, escreva 'Nada a acrescentar'."
+          class="h-[200px] w-full p-3 border border-gray-100 rounded-md"
+        ></textarea>
+        <div *ngIf="form.get('consideracoes')?.touched && !form.get('consideracoes')?.valid" class="text-red-500 text-sm">
+          <p *ngIf="form.get('consideracoes')?.hasError('required')">Este campo é obrigatório.</p>
+          <p *ngIf="form.get('consideracoes')?.hasError('minlength')">Mínimo de 3 caracteres é necessário.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-center mt-4">
+      <app-button
+        *ngIf="paginaAtual > 1"
+        [title]="'Voltar'"
+        [buttonStyle]="'full-primary-100'"
+        class="mr-4 w-[264px]"
+        (clickButton)="previousPage()"
+      ></app-button>
+      <app-button
+        *ngIf="paginaAtual < 3"
+        [title]="'Próxima'"
+        [buttonStyle]="'full-primary-500'"
+        class="w-[264px]"
+        [disabled]="!isPageValid(paginaAtual)"
+        (clickButton)="nextPage()"
+      ></app-button>
+      <app-button
+        *ngIf="paginaAtual === 3"
+        [title]="'Enviar'"
+        [buttonStyle]="'full-primary-500'"
+        class="w-[264px]"
+        [disabled]="!form.valid"
+      ></app-button>
+    </div>
+  </form>
+</div>
+

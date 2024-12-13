@@ -1,0 +1,37 @@
+<div class="w-full bg-white">
+  <div class="p-8">
+    <p class="font-bold text-lg text-center sm:text-left">{{title}}</p>
+    <div class="w-full flex items-center mt-4 sm:mt-[50px] justify-center sm:justify-start">
+      <div class="hidden sm:block rounded-full border-4 border-primary-500 mr-[30px]">
+        <img [src]="image" [alt]="alt" class="w-[90px] h-[90px]" />
+      </div>
+      <div class="w-full sm:w-[650px] mb-[50px]">
+        <div *ngIf="!isMobile" class="flex justify-center mb-[30px]">
+          <div *ngFor="let message of messages"
+               [class.invisible]="!message.visible"
+               class="rounded-full bg-gray-300 text-white w-[180px] p-[6px] flex justify-center items-center text-center text-xs">
+            {{ message.text }}
+          </div>
+        </div>
+        <div class="relative w-full flex flex-col items-center">
+          <mat-progress-bar
+            mode="determinate"
+            [value]= "progressValue"
+            [ngClass]="progressClass"
+            class="custom-progress-bar w-full relative">
+          </mat-progress-bar>
+          <div class="absolute top-0 left-0 w-full h-8 pointer-events-none">
+            <div *ngFor="let position of dividerPositions"
+                class="absolute p-1 bg-white rounded-md -translate-x-1/2"
+                [style.left.%]="position">
+              <img
+                src="../../../assets/img/Handle.png"
+                class="w-1.5 h-7 object-contain"
+                alt="divisor"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

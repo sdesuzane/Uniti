@@ -1,0 +1,8 @@
+<div class="flex flex-wrap justify-between w-full sm:w-[1050px] ml-0 sm:ml-[209px] px-4 sm:px-0">
+    <div *ngFor="let item of data" class="bg-primary-300 w-full sm:w-[270px] h-auto sm:h-[250px] rounded-[12px] py-3 px-[18px] mb-4">
+        <div class="flex justify-center items-center">
+            <img class="w-[180px] sm:w-[220px]" src={{item.imagem}} alt="imagem do card {{item.titulo}}"/>
+        </div>
+        <button (click)="navegar(item.link)" class="bg-white rounded-xl ml-0 sm:ml-[5px] mt-[12px] py-[5px] w-full sm:w-[220px]">{{item.titulo}}</button>
+    </div>
+</div>

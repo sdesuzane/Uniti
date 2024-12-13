@@ -1,0 +1,13 @@
+<div class="mt-[80px] w-full">
+  <button
+    (click)="redirectPages(item.caminho)"
+    class="flex flex-col items-center w-full mt-2 hover:bg-[#c0b5d8]"
+    *ngFor="let item of options">
+    <div class="flex flex-col items-center sm:w-3/5 w-1/2 md:w-full">
+      <img [src]="item.imagem" alt="Cadastro" />
+      <span
+        class="text-[11px] md:text-[11px] sm:text-sm font-bold text-black">{{
+        item.titulo }}</span>
+    </div>
+  </button>
+</div>

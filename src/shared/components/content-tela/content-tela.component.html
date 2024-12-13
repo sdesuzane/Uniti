@@ -1,0 +1,12 @@
+<div class=" flex flex-col justify-center h-full m-auto max-w-[250px] sm:max-w-[310px] md:max-w-[320px] lg:max-w-[400px] xl:max-w-[626px] p-3">
+  <div class="flex items-center justify-center mb-4">
+    <img src="../../../assets/img/logo_uniti.png" alt="Logo Uniti" class="w-32 h-32 object-contain">
+  </div>
+  <p class="text-center text-[var(--preto)] font-bold text-[25px] sm:text-[35px] lg:text-[40px] xl:text-[45px] mb-5
+       ">Seja bem-vindo!</p>
+  <p class="flex justify-center items-center text-center text-[var(--preto)] text-[20px] md:text-[24px] lg:text-[24px] xl:text-[32px]
+    md:leading-8 leading-[24px] ">Para acessar o Uniti, faça login abaixo:</p>
+  <div class="flex flex-col items-center gap-[13px] md:gap-[23px] mt-[25px] lg:mt-[45px]">
+      <app-button-tela-inicial (click)="openModal()" class="w-3/4" [routerLink]="['']" [queryParams]="{ user: 'Entrar' }" [texto]="txtBtnEntrar"></app-button-tela-inicial>
+  </div>
+</div>

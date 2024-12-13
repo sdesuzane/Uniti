@@ -1,0 +1,19 @@
+<mat-form-field class="w-full">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    matInput
+    [type]="type"
+    [placeholder]="placeholder"
+    [(ngModel)]="value"
+    (input)="onInput($event)"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    [ngClass]="{
+      'mat-input-invalid': showError
+    }"
+    [mask]="hasMask ? maskPattern : null"
+  />
+  <mat-error class="custom-error" *ngIf="showError">
+    <span class="material-icons">cancel</span> Error message here
+  </mat-error>
+</mat-form-field>
